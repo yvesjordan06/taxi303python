@@ -1,0 +1,57 @@
+{% extends 'taxi/base.html' %}
+{% block content %}
+    <div class="fixed-action-btn ">
+        <a href="{% url 'nouveau' %}" class="btn-floating btn-large lime">
+            <span class="large black-text">+</span>
+        </a>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin: 16px;  align-items: flex-end;">
+        <div style="display: flex; align-items: flex-end; margin: 16px">
+            <div style=" position: relative; height: 200px; width: 200px; background-color: grey; border-radius: 100%; ">
+                <p class="align-center"
+                   style="position: absolute; transform: translate(50%, -50%); top: 50%; right: 50%">No profile</p>
+            </div>
+            <h3 style="padding-left: 16px">{{ user.first_name }} <br> {{ user.last_name }}</h3>
+
+        </div>
+        <p class="grey-text">Depuis juillet 2019</p>
+    </div>
+    <div style="padding: 8px">
+        {% if reservations %}
+            <table class="striped highlight">
+                <caption><b>Courses disponible</b></caption>
+                <thead class="cyan accent-4 white-text">
+                <tr>
+                    <th>Depart</th>
+                    <th>Arrivé</th>
+                    <th>Heure de départ</th>
+                    <th>Client</th>
+
+                    <th>Tarif</th>
+                    <th>Places</th>
+                    <th class="center-align">Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.depart }}</td>
+                        <td>{{ reservation.arrive }}</td>
+                        <td>{{ reservation.heure_depart }}</td>
+                        <td>{{ reservation.client.user.get_full_name |default_if_none:"En attente" }}</td>
+
+                        <td>{{ reservation.tarif }} CFA</td>
+                        <td>2</td>
+                        {% comment %}<td class="center-align"><a href="{% url 'detail' reservation.id %}" class="waves-effect waves-light btn lime black-text accent-4">Voir</a> </td>
+                        <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>{% endcomment %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        {% endif %}
+    </div>
+{% endblock %}
+

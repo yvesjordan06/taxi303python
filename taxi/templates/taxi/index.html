@@ -1,0 +1,152 @@
+{% extends 'taxi/base.html' %}
+{% block content %}
+
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+    <div class="fixed-action-btn ">
+        <a href="{% url 'nouveau' %}" class="btn-floating btn-large lime">
+            <span class="large black-text">+</span>
+        </a>
+    </div>
+
+    <ol>
+
+
+    </ol>
+
+    <div style="display: flex; justify-content: space-between; margin: 16px;  align-items: flex-end;">
+        <div style="display: flex; align-items: flex-end; margin: 16px">
+            <div style=" position: relative; height: 200px; width: 200px; background-color: grey; border-radius: 100%; ">
+                <p class="align-center"
+                   style="position: absolute; transform: translate(50%, -50%); top: 50%; right: 50%">No profile</p>
+            </div>
+            <h3 style="padding-left: 16px">Nom <br> Prenom</h3>
+
+        </div>
+        <p class="grey-text">Depuis juillet 2019</p>
+    </div>
+    <div style="display: flex; align-items: flex-end">
+        <b>Depart</b>
+        <span style="margin-left: 25px">Nkomkana</span>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center">
+        <a style="width: 100%; margin: 24px" class="waves-effect waves-light btn cyan accent-4 btn-large">Nouvelle
+            Reservation</a> </td>
+    </div>
+    <div style="padding: 32px">
+        <table class="striped highlight">
+            <caption><b>Mes reservations</b></caption>
+            <thead class=" cyan accent-4 white-text ">
+            <tr>
+                <th>Depart</th>
+                <th>Arrivé</th>
+                <th>Heure de départ</th>
+                <th>Chauffeur</th>
+                <th>Vehicule</th>
+                <th>Tarif</th>
+                <th>Places</th>
+                <th colspan="2" class="center-align">Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>En attente</td>
+                <td>En attente</td>
+                <td>600 CFA</td>
+                <td>2</td>
+                <td class="center-align"><a class="waves-effect waves-light btn lime black-text accent-4">Voir</a></td>
+                <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>
+            </tr>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>En attente</td>
+                <td>En attente</td>
+                <td>300 CFA</td>
+                <td>1</td>
+                <td class="center-align"><a class="waves-effect waves-light btn cyan accent-4">Voir</a></td>
+                <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>
+            </tr>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>En attente</td>
+                <td>En attente</td>
+                <td>300 CFA</td>
+                <td>1</td>
+                <td class="center-align"><a class="waves-effect waves-light btn cyan accent-4">Voir</a></td>
+                <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <table class="striped highlight">
+            <caption><b>Courses disponible</b></caption>
+            <thead class="lime">
+            <tr>
+                <th>Depart</th>
+                <th>Arrivé</th>
+                <th>Heure de départ</th>
+                <th>Client</th>
+
+                <th>Tarif</th>
+                <th>Places</th>
+                <th class="center-align">Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>Hiro</td>
+                <td>600 CFA</td>
+                <td>2</td>
+                <td class="center-align"><a class="waves-effect waves-light btn cyan accent-4">Accepter</a></td>
+            </tr>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>Hiro</td>
+                <td>300 CFA</td>
+                <td>1</td>
+                <td class="center-align"><a class="waves-effect waves-light btn cyan accent-4">Accepter</a></td>
+            </tr>
+            <tr>
+                <td>Messasi</td>
+                <td>Nkomkana</td>
+                <td>Mercredi 13 Nov - 11h32</td>
+                <td>Hiro</td>
+                <td>300 CFA</td>
+                <td>1</td>
+                <td class="center-align"><a class="waves-effect waves-light btn cyan accent-4">Accepter</a></td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

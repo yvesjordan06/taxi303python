@@ -1,0 +1,18 @@
+{% extends 'taxi/base.html' %}
+{% block content %}
+    <h2>Reservation</h2>
+    <div class="container">
+        <div class="row">
+            <span>Depart</span><span>{{ reservation.depart }}</span>
+        </div>
+        <div class="row">
+            <span>Arrivé</span><span>{{ reservation.arrive }}</span>
+        </div>
+        <div class="row">
+            <span>Chauffeur</span><span>{{ reservation.chauffeur |default_if_none:"En attente" }}</span>
+        </div>
+        <div class="row">
+            <span>Depart</span><span>{{ reservation.depart }}</span>
+        </div>
+    </div>
+{% endblock %}

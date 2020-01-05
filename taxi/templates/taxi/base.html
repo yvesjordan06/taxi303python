@@ -1,0 +1,76 @@
+<head>
+    {% load static %}
+    <link href="{% static "materialize/css/materialize.min.css" %}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
+    <meta charset="UTF-8">
+    <title>Taxi 303</title>
+</head>
+<body style="margin:0px; padding: 0px; box-sizing: border-box; width: 100%">
+<nav class="nav-extended cyan accent-4">
+    <div class="nav-wrapper" style="margin-bottom: 20px">
+        <a href="#" class="brand-logo" style="padding: 8px"> <span style="font-size: 64px">Taxi 303</span></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Se deconnecter</a></li>
+        </ul>
+    </div>
+    <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="{% url 'home' %}">Acceuil</a></li>
+            <li class="tab"><a href="{% url 'reservations' %}">Reservation</a></li>
+            <li class="tab"><a href="#">A Propos</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div>
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<footer class="page-footer cyan accent-4">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">TP INFO 303</h5>
+                <p class="grey-text text-lighten-4">Tout droit reserveé</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Lien utile</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">A Propos de nous</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">L'entreprise</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Comment reserver?</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Faire partir de l'equipe</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2020 Copyright Text
+
+        </div>
+    </div>
+</footer>
+
+
+</body>
+
+<script src="{% static "materialize/js/materialize.min.js" %}"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+
+
+
+</script>
