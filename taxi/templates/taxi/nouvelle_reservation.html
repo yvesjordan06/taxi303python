@@ -3,7 +3,10 @@
     <div class="container">
         <h2>Nouvelle Reservation</h2>
         <form method="POST" class="post-form">{% csrf_token %}
-            {{ form.as_p }}
+            <div class="input-field col s12">
+                {{ form.as_p }}
+            </div>
+
             <button type="submit" class="save btn btn-default cyan">Reserver</button>
         </form>
     </div>

@@ -10,18 +10,32 @@
     <div class="nav-wrapper" style="margin-bottom: 20px">
         <a href="#" class="brand-logo" style="padding: 8px"> <span style="font-size: 64px">Taxi 303</span></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Se deconnecter</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="{% url 'logout' %}">Components</a></li>
+                <li><a href="{% url 'logout' %}">Se deconnecter</a></li>
+
+
+
+            {% endif %}
         </ul>
+
     </div>
     <div class="nav-content">
+
         <ul class="tabs tabs-transparent">
-            <li class="tab"><a href="{% url 'home' %}">Acceuil</a></li>
-            <li class="tab"><a href="{% url 'reservations' %}">Reservation</a></li>
-            <li class="tab"><a href="#">A Propos</a></li>
+            {% if user.is_authenticated %}
+                <li class="tab"><a href="{% url 'home' %}">Acceuil</a></li>
+                <li class="tab"><a href="{% url 'reservations' %}">Reservation</a></li>
+                <li class="tab"><a href="#">A Propos</a></li>
+            {% else %}
+                <li class="tab"><a href="{% url 'home' %}">A Propos</a></li>
+            {% endif %}
+
         </ul>
+
     </div>
 </nav>
 
@@ -66,10 +80,15 @@
 
 <script src="{% static "materialize/js/materialize.min.js" %}"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
       document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);
   });
+
 
 
 

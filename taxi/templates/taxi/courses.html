@@ -14,17 +14,21 @@
             <h3 style="padding-left: 16px">{{ user.first_name }} <br> {{ user.last_name }}</h3>
 
         </div>
-        <p class="grey-text">Depuis juillet 2019</p>
+        <p class="grey-text">Chauffeur depuis {{ user.date_joined | date:' d F, Y' }}</p>
+        <p class="grey-text">Voiture : {{ user.chauffeur.voiture }}</p>
+        <p class="grey-text">Places disponible: {{ user.chauffeur.voiture.place_dispo }}
+            / {{ user.chauffeur.voiture.places }}</p>
     </div>
     <div style="padding: 8px">
         {% if reservations %}
             <table class="striped highlight">
-                <caption><b>Courses disponible</b></caption>
+                <caption><b>{{ reservations.count }} Courses disponible</b></caption>
                 <thead class="cyan accent-4 white-text">
                 <tr>
                     <th>Depart</th>
                     <th>Arrivé</th>
                     <th>Heure de départ</th>
+                    <th>Type</th>
                     <th>Client</th>
 
                     <th>Tarif</th>
@@ -38,13 +42,22 @@
                     <tr>
                         <td>{{ reservation.depart }}</td>
                         <td>{{ reservation.arrive }}</td>
-                        <td>{{ reservation.heure_depart }}</td>
+                        <td> {{ reservation.heure_depart | date:'l, d F, Y' }}
+                            à {{ reservation.heure_depart | time:'H:i' }}</td>
+                        <td>{{ reservation.type }}</td>
                         <td>{{ reservation.client.user.get_full_name |default_if_none:"En attente" }}</td>
 
                         <td>{{ reservation.tarif }} CFA</td>
-                        <td>2</td>
-                        {% comment %}<td class="center-align"><a href="{% url 'detail' reservation.id %}" class="waves-effect waves-light btn lime black-text accent-4">Voir</a> </td>
-                        <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>{% endcomment %}
+                        <td>{{ reservation.places }}</td>
+                        {% if reservation.statut == 'EN COUR' %}
+                            <td class="center-align"><a href="{% url 'terminer' reservation.id %}"
+                                                        class="waves-effect waves-light btn lime black-text accent-4">Terminer</a>
+                            </td>
+                        {% else %}
+                            <td class="center-align"><a href="{% url 'prendre' reservation.id %}"
+                                                        class="waves-effect waves-light btn lime black-text accent-4">Prendre</a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>

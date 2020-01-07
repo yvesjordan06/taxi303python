@@ -1,12 +1,14 @@
-from .models import *
-# Register your models here.
-
+from django import forms
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models import *
+
+
+# Register your models here.
 
 
 # Register your models here.
@@ -51,6 +53,18 @@ class UserChangeForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'telephone', 'est_chauffeur')
 
 
+class VoitureAdmin(ModelAdmin):
+    empty_value_display = '-VIDE-'
+
+    list_display = ('marque', 'categorie', 'chauffeur', 'places', 'places_occuper')
+
+
+class Chauffer(ModelAdmin):
+    empty_value_display = '-VIDE-'
+
+    list_display = ('marque', 'categorie', 'voiture')
+
+
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -88,5 +102,5 @@ admin.site.unregister(Group)
 # admin.site.register(TaxiUser)
 admin.site.register(Chauffeur)
 admin.site.register(Client)
-admin.site.register(Voiture)
+admin.site.register(Voiture, VoitureAdmin)
 admin.site.register(Reservation)

@@ -41,17 +41,25 @@
                         <td> {{ reservation.heure_depart | date:'l, d F, Y' }}
                             à {{ reservation.heure_depart | time:'H:i' }}</td>
                         {% if reservation.chauffeur %}
-                            <td>{{ reservation.chauffeur.get_full_name }}</td>
                             <td>{{ reservation.chauffeur }}</td>
+                            <td>{{ reservation.chauffeur.voiture }}</td>
                         {% else %}
+                            <td>En attente</td>
                             <td>En attente</td>
                         {% endif %}
                         <td>{{ reservation.tarif }} CFA</td>
-                        <td>2</td>
+                        <td>{{ reservation.places }}</td>
                         <td class="center-align"><a href="{% url 'detail' reservation.id %}"
                                                     class="waves-effect waves-light btn lime black-text accent-4">Voir</a>
                         </td>
-                        <td class="center-align"><a class="waves-effect waves-light btn red accent-4">Annuler</a></td>
+
+                        {% if reservation.statut == 'ATTENTE' %}
+                            <td class="center-align"><a href="{% url 'supprimer' reservation.id %}"
+                                                        class="waves-effect waves-light btn red accent-4">Annuler</a>
+                            </td>
+
+                        {% endif %}
+
                     </tr>
                 {% endfor %}
                 </tbody>

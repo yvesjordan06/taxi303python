@@ -4,9 +4,10 @@ from .models import Reservation, TaxiUser
 
 
 class PostForm(forms.ModelForm):
+
     class Meta:
         model = Reservation
-        fields = ('depart', 'arrive', 'heure_arrive', 'type')
+        fields = ('depart', 'arrive', 'heure_arrive', 'type', 'places')
 
 
 class AuthForm(forms.ModelForm):
