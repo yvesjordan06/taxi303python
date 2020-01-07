@@ -25,7 +25,7 @@ SECRET_KEY = 'nzvz=%=k)cq_f)xccv(9=&wnfcd(24#)g7k$$w3-gt7_y++@=0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['taxi303.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['taxi303.herokuapp.com/', '127.0.0.1', 'yvesjordan06.pythonanywhere.com']
 
 # Application definition
 
