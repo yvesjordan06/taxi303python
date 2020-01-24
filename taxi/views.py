@@ -102,8 +102,9 @@ def inscription(request):
 
 @login_required
 def reservations(request):
+    user: Utilisateur = request.user
     reser = Reservation.objects.filter(jour_depart=timezone.now().weekday()).filter(
-        guichetier__date_embauche__isnull=True)
+        guichetier__date_embauche__isnull=True) if user.est_employer() else Reservation.objects.filter(client=user.client)
 
 
 
