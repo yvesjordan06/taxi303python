@@ -1,0 +1,87 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVEAU COLIS{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-train-variant"></i>
+                            </span> Expedition </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Ajouter un colis <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ajouter un colis</h4>
+                        <form class="forms-sample">
+                            <h2 class="card-subtitle">Expediteur</h2>
+                            <div class="form-group row">
+                                <label for="first_name"
+                                       class="col-sm-3 col-form-label">Nom : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="first_name" class="form-control" id="first_name"
+                                           placeholder="Nom ">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="last_name"
+                                       class="col-sm-3 col-form-label">Prenom : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="last_name" class="form-control" id="last_name"
+                                           placeholder="Prenom ">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="telephone"
+                                       class="col-sm-3 col-form-label">Numero de Telephone : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="telephone" class="form-control" id="telephone"
+                                           placeholder="Numero de Telephone">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cni"
+                                       class="col-sm-3 col-form-label">Numero de CNI</label>
+                                <div class="col-sm-9">
+                                    <input name="cni" type="text" class="form-control" id="cni"
+                                           placeholder="Numero de CNI">
+                                </div>
+                            </div>
+                            <h2 class="card-subtitle">Colis</h2>
+                            <div class="form-group row">
+                                <label for="contenu"
+                                       class="col-sm-3 col-form-label">Contenu</label>
+                                <div class="col-sm-9">
+                                    <input name="programme" type="text" class="form-control" id="contenu"
+                                           placeholder="contenu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="destination"
+                                       class="col-sm-3 col-form-label">Destination</label>
+                                <div class="col-sm-9">
+                                    <input name="destination" , type="text" , value="Aujourd'hui" , class="form-control"
+                                           placeholder="Destination"/>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

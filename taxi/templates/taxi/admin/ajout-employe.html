@@ -1,0 +1,96 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVEAU EMPLOYE{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-account-multiple"></i>
+                            </span> Employés </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Ajouter un Employés <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ajouter un employé</h4>
+                        <form class="forms-sample" method="post" action="{% url "employer.nouveau" %}">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="exampleInputUsername2"
+                                       class="col-sm-3 col-form-label">Nom : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="first_name" class="form-control" id="exampleInputUsername2"
+                                           placeholder="Nom " required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleInputEmail2"
+                                       class="col-sm-3 col-form-label">Prenom : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="last_name" class="form-control" id="exampleInputEmail2"
+                                           placeholder="Prenom" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleInputMobile"
+                                       class="col-sm-3 col-form-label">Numero de Telephone</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="telephone" class="form-control" id="exampleInputMobile"
+                                           placeholder="Numero de telephone" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cni"
+                                       class="col-sm-3 col-form-label">Numero de CNI</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="cni" class="form-control" id="cni"
+                                           placeholder="Numero de CNI" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleInputPassword2"
+                                       class="col-sm-3 col-form-label">Poste</label>
+                                <div class="col-sm-9">
+                                    <select type="text" name="poste" class="form-control" id="exampleInputPassword2"
+                                            placeholder="Poste">
+                                        <option value="CHAUFFEUR" selected>Chauffeur</option>
+                                        <option value="GUICHETIER">Guichetier</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="salaire"
+                                       class="col-sm-3 col-form-label">Salaire</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="salaire" type="number" min="35000" value="35000"
+                                           placeholder="Salaire"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleInputPassword2"
+                                       class="col-sm-3 col-form-label">Date d'embauche</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="date" type="date" placeholder="dd/mm/yyyy"/>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

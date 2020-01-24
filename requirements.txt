@@ -1,10 +1,2 @@
 Django
-dj-config-url
-dj-static
-gunicorn
-Unipath
-python-decouple
-Pillow
-Markdown
-bleach
-whitenoise
+

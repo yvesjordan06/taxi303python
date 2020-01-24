@@ -1,0 +1,101 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %}Expedition{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-account-multiple"></i>
+                            </span> Ajouter un colis </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row" id="proBanner">
+            <div class="col-12">
+                            <span class="d-flex align-items-center purchase-popup">
+                                <p>Ajouter un colis ?</p>
+                                <a href="{% url 'expeditions.nouveau' %}"
+                                   class="btn ml-auto download-button">Ajouter</a>
+                            </span>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"> Liste des colis </h4>
+                        </p>
+                        <table class="table ">
+                            <thead>
+                            <tr>
+                                <th> User</th>
+                                <th> Contenu</th>
+                                <th> Depart</th>
+                                <th> Destination</th>
+                                <th> Tarif</th>
+                                <th> Status</th>
+                                <th> Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="py-1">
+                                    John Doe
+                                </td>
+                                <td> Sack de Macabo</td>
+                                <td> Yaounde</td>
+                                <td> Douala</td>
+                                <td> 7000 FCFA</td>
+                                <td> En attente</td>
+                                <td><a href="{% url 'employer.detail' %}"><label
+                                        class="badge badge-success col-sm-6">Livrer</label></a>
+                                    <a href="{% url 'employer.salaire' %}"><label class="badge badge-danger col-sm-6">Supprimer</label></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">
+                                    John Doe
+                                </td>
+                                <td> Sack de Macabo</td>
+                                <td> Yaounde</td>
+                                <td> Douala</td>
+                                <td> 7000 FCFA</td>
+                                <td> En attente</td>
+                                <td><a href="{% url 'employer.detail' %}"><label
+                                        class="badge badge-success col-sm-6">Livrer</label></a>
+                                    <a href="{% url 'employer.salaire' %}"><label class="badge badge-danger col-sm-6">Supprimer</label></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">
+                                    John Doe
+                                </td>
+                                <td> Sack de Macabo</td>
+                                <td> Yaounde</td>
+                                <td> Douala</td>
+                                <td> 7000 FCFA</td>
+                                <td> En attente</td>
+                                <td><a href="{% url 'employer.detail' %}"><label
+                                        class="badge badge-success col-sm-6">Livrer</label></a>
+                                    <a href="{% url 'employer.salaire' %}"><label class="badge badge-danger col-sm-6">Supprimer</label></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

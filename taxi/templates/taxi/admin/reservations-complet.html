@@ -1,0 +1,80 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-ticket"></i>
+                            </span> Historique des reservations </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row" id="proBanner">
+            <div class="col-12">
+                            <span class="d-flex align-items-center purchase-popup">
+                                <p>Voir les reservation d'aujourd'hui ?</p>
+                                <a href="{% url 'reservations.jour' %}"
+                                   class="btn ml-auto download-button">Voir</a>
+                            </span>
+            </div>
+
+
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"> Historique des reservations</h4>
+                        </p>
+                        <table class="table ">
+                            <thead>
+                            <tr>
+                                <th> Client</th>
+                                <th> CNI</th>
+                                <th> Depart</th>
+                                <th> Arrive</th>
+                                <th> Places</th>
+                                <th> Tarif</th>
+                                <th> Heure Depart</th>
+                                <th> Categorie</th>
+                                <th> Jour Voyage</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reservation in reservations %}
+                                <tr>
+                                    <td class="py-1">
+                                        {{ reservation.client.user }}
+                                    </td>
+                                    <td> {{ reservation.client.user.cni }} </td>
+                                    <td> {{ reservation.programme.get_depart_display }} </td>
+                                    <td> {{ reservation.programme.get_arrive_display }} </td>
+                                    <td> {{ reservation.places }} </td>
+                                    <td> {{ reservation.montant }} </td>
+                                    <td> {{ reservation.programme.get_heure_depart_display }} </td>
+                                    <td> {{ reservation.programme.get_type_display }} </td>
+                                    <td> {{ reservation.get_jour_depart_display }} </td>
+                                    {% comment %} <td> {{ reservation.created_at |date:"d m, Y" }} </td> {% endcomment %}
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

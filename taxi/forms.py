@@ -1,16 +1,16 @@
 from django import forms
 
-from .models import Reservation, TaxiUser
+from .models import Reservation, Utilisateur
 
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Reservation
-        fields = ('depart', 'arrive', 'heure_arrive', 'type', 'places')
+        fields = ('programme', 'places')
 
 
 class AuthForm(forms.ModelForm):
     class Meta:
-        model = TaxiUser
+        model = Utilisateur
         fields = ('telephone', 'password')

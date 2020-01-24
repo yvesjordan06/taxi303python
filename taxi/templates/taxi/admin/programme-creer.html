@@ -1,0 +1,105 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVEAU Programme{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-train-variant"></i>
+                            </span> Programme </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Ajouter un programme <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ajouter un programme</h4>
+                        <form class="forms-sample" method="post" action="{% url "programme.nouveau" %}">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="depart"
+                                       class="col-sm-3 col-form-label">Depart : </label>
+                                <div class="col-sm-9">
+                                    <select type="text" name="depart" class="form-control" id="depart"
+                                            placeholder="Depart " required>
+                                        <option value="YDE">Yaounde</option>
+                                        <option value="DLA">Douala</option>
+                                        <option value="BDA">Bamenda</option>
+                                        <option value="BAF">Baffoussam</option>
+                                        <option value="BDJ">Bandjoun</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="arrive"
+                                       class="col-sm-3 col-form-label">Destination : </label>
+                                <div class="col-sm-9">
+                                    <select type="text" name="arrive" class="form-control" id="arrive"
+                                            placeholder="Destination" required>
+                                        <option value="YDE">Yaounde</option>
+                                        <option value="DLA">Douala</option>
+                                        <option value="BDA">Bamenda</option>
+                                        <option value="BAF">Baffoussam</option>
+                                        <option value="BDJ">Bandjoun</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="type"
+                                       class="col-sm-3 col-form-label">Type : </label>
+                                <div class="col-sm-9">
+                                    <select type="text" name="type" class="form-control" id="type"
+                                            placeholder="Type " required>
+                                        <option value="CL">Classique</option>
+                                        <option value="VIP">VIP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="heure"
+                                       class="col-sm-3 col-form-label">Heure Depart : </label>
+                                <div class="col-sm-9">
+                                    <input type="time" name="heure" class="form-control" id="heure"
+                                           placeholder="Heure " required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="prix"
+                                       class="col-sm-3 col-form-label">Prix</label>
+                                <div class="col-sm-9">
+                                    <input name="prix" type="number" class="form-control" id="prix" min="1000"
+                                           value="1500"
+                                           placeholder="Prix" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="voiture"
+                                       class="col-sm-3 col-form-label">Vehicule : </label>
+                                <div class="col-sm-9">
+                                    <select type="text" name="voiture" class="form-control" id="voiture"
+                                            placeholder="Voiture " required>
+                                        {% for voiture in voitures %}
+                                            <option value="{{ voiture.id }}">{{ voiture }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

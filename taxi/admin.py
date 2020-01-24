@@ -21,8 +21,8 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
-        model = TaxiUser
-        fields = ('password', 'first_name', 'last_name', 'telephone', 'est_chauffeur')
+        model = Utilisateur
+        fields = ('password', 'first_name', 'last_name', 'telephone')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -49,20 +49,14 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = TaxiUser
-        fields = ('first_name', 'last_name', 'telephone', 'est_chauffeur')
+        model = Utilisateur
+        fields = ('first_name', 'last_name', 'telephone')
 
 
 class VoitureAdmin(ModelAdmin):
     empty_value_display = '-VIDE-'
 
     list_display = ('marque', 'categorie', 'chauffeur', 'places', 'places_occuper')
-
-
-class Chauffer(ModelAdmin):
-    empty_value_display = '-VIDE-'
-
-    list_display = ('marque', 'categorie', 'voiture')
 
 
 class UserAdmin(BaseUserAdmin):
@@ -73,10 +67,10 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('telephone', 'est_chauffeur', 'first_name', 'last_name',)
-    list_filter = ('est_chauffeur',)
+    list_display = ('telephone', 'first_name', 'last_name',)
+
     fieldsets = (
-        (None, {'fields': ('telephone', 'est_chauffeur')}),
+        (None, {'fields': ['telephone']}),
         ('Personal info', {'fields': ('first_name', 'last_name',)}),
         # ('Permissions', {'fields': ('est_chauffeur',)}),
     )
@@ -94,13 +88,16 @@ class UserAdmin(BaseUserAdmin):
 
 
 # Now register the new UserAdmin...
-admin.site.register(TaxiUser, UserAdmin)
+admin.site.register(Utilisateur, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
 
 # admin.site.register(TaxiUser)
-admin.site.register(Chauffeur)
+admin.site.register(Employe)
+admin.site.register(Colis)
+admin.site.register(Expedition)
+admin.site.register(Programme)
 admin.site.register(Client)
 admin.site.register(Voiture, VoitureAdmin)
 admin.site.register(Reservation)

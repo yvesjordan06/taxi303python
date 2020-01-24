@@ -1,0 +1,231 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVEAU EMPLOYE{% endblock %}
+{% block content %}
+    {% load static %}
+
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-account-multiple"></i>
+                            </span> Employés </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Bulettin de paie <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <table width="100%" style="border-style: solid">
+                            <tbody>
+                            <tr>
+                                <td colspan="2" width="313">
+                                    <p><strong>SALARIE</strong></p>
+                                </td>
+                                <td colspan="4" width="349">
+                                    <p><strong>EMPLOYEUR</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" width="313">
+                                    <p>John</p>
+                                </td>
+                                <td colspan="4" width="349">
+                                    <p>Tala Voyage</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" width="313">
+                                    <p>Yaounde,Cameroun</p>
+                                </td>
+                                <td colspan="4" width="349">
+                                    <p>Etablissement</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" width="313">
+                                    <p>Chef d'agence</p>
+                                </td>
+                                <td colspan="4" width="349">
+                                    <p>Yaoundé, Cameroun</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" width="313">
+                                    <p>&nbsp;P&eacute;riode du 02/01/20&nbsp; au&nbsp; 26/02/20</p>
+                                </td>
+                                <td colspan="4" width="349">
+                                    <p>&nbsp;Date de la paie : 27/02/20</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" width="224">
+                                    <p><strong>LIBELLE</strong></p>
+                                </td>
+                                <td rowspan="2" width="89">
+                                    <p><strong>BASE</strong></p>
+                                </td>
+                                <td colspan="2" width="181">
+                                    <p><strong>CHARGES SALARIALES</strong></p>
+                                </td>
+                                <td colspan="2" width="168">
+                                    <p><strong>CHARGES PATRONALES</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="91">
+                                    <p>Taux</p>
+                                </td>
+                                <td width="91">
+                                    <p>Montant</p>
+                                </td>
+                                <td width="84">
+                                    <p>Taux (5)</p>
+                                </td>
+                                <td width="84">
+                                    <p>Montant</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p>Salaire de base</p>
+                                </td>
+                                <td width="89">
+                                    <p>210000 FCFA</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="89">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p>Avantage</p>
+                                </td>
+                                <td width="89">
+                                    <p>10000 FCFA</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p><strong>BRUT</strong></p>
+                                </td>
+                                <td width="89">
+                                    <p><strong>260000 FCFA</strong></p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p><u>A DEDUIRE</u></p>
+                                </td>
+                                <td width="89">
+                                    <p>40000 FCFA</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="224">
+                                    <p><strong>NET A PAYER&nbsp;&nbsp; </strong>(4)</p>
+                                </td>
+                                <td width="89">
+                                    <p><strong>200000 FCFA</strong></p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="91">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="84">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

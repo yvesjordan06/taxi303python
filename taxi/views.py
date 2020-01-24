@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login as SessionLogin, logout as SessionLogout
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
-from .forms import PostForm, AuthForm
+from .forms import AuthForm
 from .models import *
 
 
@@ -12,7 +12,7 @@ class EmailBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):
         print('this one hitted')
 
-        user = TaxiUser.objects.get(username=username)
+        user = Utilisateur.objects.get(username=username)
 
         if user.check_password(password):
             return user
@@ -22,14 +22,8 @@ class EmailBackend(ModelBackend):
 # Create your views here.
 @login_required
 def home(request):
-    if not request.user.est_chauffeur:
-        return redirect('reservations')
-    else:
-        return redirect('courses')
-    reservations = Reservation.objects.all()
+    return render(request, 'taxi/admin/index.html', {
 
-    return render(request, 'taxi/index.html', {
-        'reservations': reservations,
     })
 
 
@@ -53,7 +47,7 @@ def login(request):
             password: str = request.POST['password']
             print(username)
             print(password)
-            user: TaxiUser = authenticate(username=username, password=password)
+            user: Utilisateur = authenticate(username=username, password=password)
             print(user)
             if user is not None:
                 SessionLogin(request, user)
@@ -71,7 +65,7 @@ def inscription(request):
             password: str = request.POST['password']
             print(username)
             print(password)
-            user: TaxiUser = authenticate(username=username, password=password)
+            user: Utilisateur = authenticate(username=username, password=password)
             print(user)
             if user is not None:
                 SessionLogin(request, user)
@@ -82,14 +76,147 @@ def inscription(request):
 
 @login_required
 def reservations(request):
-    _reservations = Reservation.objects.filter(client=request.user.client).order_by('-created_at')
-    return render(request, 'taxi/reservations.html', {'reservations': _reservations})
+    reser = Reservation.objects.filter(jour_depart=timezone.now().weekday()).filter(
+        guichetier__date_embauche__isnull=True)
+
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return reservations_client(request)
+
+    return render(request, 'taxi/admin/reservations.html', {'reservations': reser})
+
+
+def reservations_jour(request):
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return reservations_client(request)
+    reser = Reservation.objects.filter(jour_depart=timezone.now().weekday())
+    return render(request, 'taxi/admin/reservations-du--jour.html', {'reservations': reser})
+
+
+def reservations_historique(request):
+    reser = Reservation.objects.all()
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return reservations_client(request)
+
+    return render(request, 'taxi/admin/reservations-complet.html', {'reservations': reser})
+
+
+def reservations_client(request):
+    prog = Programme.objects.all()
+    return render(request, 'taxi/reservations.html', {'programme': prog})
+
+@login_required
+def reservations_nouveau(request):
+
+    if request.method == "POST":
+        form = request.POST
+        print(form)
+        first_name = form['first_name'] or 'Client Inconnu'
+        last_name = form['last_name'] or 'Client Inconnu'
+        telephone = form['telephone'] or 'Client Inconnu'
+        programme = form['programme']
+
+        places = form['places']
+        cni = form['cni']
+        date: str = form['date']
+
+        print(date)
+        print(type(date))
+        fdate = date.split('-')
+        date: datetime.date = datetime.date(int(fdate[0]), int(fdate[1]), int(fdate[2]))
+        try:
+            user = Utilisateur.objects.get(cni__exact=cni)
+        except:
+            user = Utilisateur(
+                first_name=first_name,
+                last_name=last_name,
+                telephone=telephone,
+                cni=cni
+            )
+            user.set_password(cni)
+            user.save()
+
+        client, created = Client.objects.get_or_create(user=user)
+
+        reser = Reservation(
+            programme=Programme.objects.get(pk=programme),
+            client=client,
+            jour_depart=date.weekday(),
+            places=places,
+            date_depart=date
+        )
+        muser: Utilisateur = request.user
+
+        if muser.est_employer() and (
+                muser.is_superuser or muser.employe.poste == "GUICHETIER") and date == timezone.now().date():
+            reser.guichetier = muser.employe
+            p = Programme.objects.get(pk=programme)
+            p.voiture.places_occuper = p.voiture.places_occuper + int(places)
+            p.voiture.save()
+            p.save()
+
+        reser.save()
+
+        return redirect('reservations')
+    else:
+        reser = Programme.objects.all()
+        user: Utilisateur = request.user
+        if not user.est_employer():
+            return render(request, 'taxi/nouvelle_reservation.html', {'reservations': reser})
+        return render(request, 'taxi/admin/reservation-creer.html', {'reservations': reser})
 
 
 @login_required
-def nouveau(request):
+def employer(request):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+
+    employee = Employe.objects.all()
+
+    return render(request, 'taxi/admin/employe.html', {'employees': employee})
+
+
+def employer_detail(request, employer_id):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+
+    return render(request, 'taxi/admin/detail-employe.html', {'employee': get_object_or_404(Employe, pk=employer_id)})
+
+
+def employer_salaire(request):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+
+    return render(request, 'taxi/admin/bulletin-employe.html', {})
+
+
+def employer_nouveau(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = request.POST
+        print(form)
+        first_name = form['first_name']
+        last_name = form['last_name']
+        telephone = form['telephone']
+        poste = form['poste']
+        salaire = form['salaire']
+        date = form['date']
+        cni = form['cni']
+
+        a = Utilisateur.objects.filter(cni__exact=cni).union(Utilisateur.objects.filter(telephone__exact=telephone))
+        if a.count() > 0: return redirect('employer')
+        user = Utilisateur(first_name=first_name, last_name=last_name, cni=cni, telephone=telephone)
+        user.set_password(cni)
+        user.save()
+        employer = Employe(user=user, poste=poste, salaire=salaire)
+        employer.save()
+        print(user)
+        return redirect('employer')
+
         if form.is_valid():
 
             post: Reservation = form.save(commit=False)
@@ -114,33 +241,41 @@ def nouveau(request):
             post.save()
         return redirect('reservations')
     else:
-        form = PostForm()
-        return render(request, 'taxi/nouvelle_reservation.html', {'form': form})
+        user: Utilisateur = request.user
+        if not user.is_superuser:
+            return redirect('reservations')
+        return render(request, 'taxi/admin/ajout-employe.html', {})
 
 
 @login_required
-def courses(request):
-    user: TaxiUser = request.user
-    if not user.est_chauffeur:
+def expedition(request):
+    user: Utilisateur = request.user
+    if not user.est_employer():
         return redirect('reservations')
 
-    _mes_reservations = Reservation.objects.filter(chauffeur=user.chauffeur, statut__exact='EN COUR')
-    places_dispo = user.chauffeur.voiture.places - user.chauffeur.voiture.places_occuper
-    if places_dispo == user.chauffeur.voiture.places:
-        _reservations = Reservation.objects.filter(chauffeur__isnull=True, places__lte=places_dispo,
-                                                   statut__exact='ATTENTE', ).union(_mes_reservations)
-    else:
-        _reservations = Reservation.objects.filter(chauffeur__isnull=True, places__lte=places_dispo, type='CL',
-                                                   statut__exact='ATTENTE').union(_mes_reservations)
+    return render(request, 'taxi/admin/expeditions.html', {})
 
-    if user.chauffeur.statut == 'OFF':
-        _reservations = Reservation.objects.filter(chauffeur=user.chauffeur, statut__exact='EN COUR')
 
-    return render(request, 'taxi/courses.html', {'reservations': _reservations.order_by('-created_at')})
+@login_required
+def expedition_nouveau(request):
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return redirect('reservations')
+
+    return render(request, 'taxi/admin/expedition-creer.html', {})
+
+
+@login_required
+def expedition_terminer(request):
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return redirect('reservations')
+
+    return render(request, 'taxi/admin/expeditions-terminer.html', {})
 
 
 def prendre(request, reservation_id):
-    user: TaxiUser = request.user
+    user: Utilisateur = request.user
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.chauffeur = user.chauffeur
     reservation.statut = 'EN COUR'
@@ -156,7 +291,7 @@ def prendre(request, reservation_id):
 
 
 def terminer(request, reservation_id):
-    user: TaxiUser = request.user
+    user: Utilisateur = request.user
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.statut = 'TERMINER'
     user.chauffeur.voiture.places_occuper -= reservation.places
@@ -173,3 +308,36 @@ def supprimer(request, reservation_id):
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.delete()
     return redirect(home)
+
+
+@login_required
+def programme(request):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+
+    programmes = Programme.objects.all()
+
+    return render(request, 'taxi/admin/programme.html', {'programmes': programmes})
+
+
+@login_required
+def programme_nouveau(request):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+    if request.method == 'POST':
+        form = request.POST
+        print(form['heure'])
+        p = Programme(
+            depart=form['depart'],
+            arrive=form['arrive'],
+            type=form['type'],
+            voiture=Voiture.objects.get(pk=form['voiture']),
+            tarif=form['prix'],
+            heure_depart=form['heure']
+        )
+        p.save()
+        return redirect(programme)
+
+    return render(request, 'taxi/admin/programme-creer.html', {'voitures': Voiture.objects.all()})

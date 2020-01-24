@@ -1,0 +1,71 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVEAU EMPLOYE{% endblock %}
+{% block content %}
+    {% load static %}
+
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-account-multiple"></i>
+                            </span> Employés </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Details <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <div class="d-flex mt-5 align-items-top">
+                            <img src="{% static 'assets/images/faces/user2.svg' %}" class="img-sm rounded-circle mr-3"
+                                 alt="image">
+                            <div class="mb-0 flex-grow">
+                                <h5 class="mr-2 mb-2">{{ employee.user.get_full_name }}</h5>
+                                <br>
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <i class="mdi mdi-account-card-details
+                                    icon-sm mr-2"></i>
+                                    <span>{{ employee.get_poste_display }}</span>
+                                </div>
+                                <br>
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <i class="mdi mdi-clock icon-sm mr-2"></i>
+                                    <span>Embauché le {{ employee.date_embauche }}</span>
+                                </div>
+
+                                <br>
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <i class="mdi mdi-cellphone icon-sm mr-2"></i>
+                                    <span>+237 {{ employee.user.telephone }}<span>
+                                </div>
+
+                                <br>
+                                <div class="d-flex align-items-center text-muted font-weight-light">
+                                    <i class="mdi mdi-card icon-sm mr-2"></i>
+                                    <span>No CNI {{ employee.user.cni }}<span>
+                                </div>
+
+                                <br><br>
+                                <a href="{% url 'employer.salaire' %}" class="btn btn-gradient-primary mr-2">Generer le
+                                    bulettin de paie</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
