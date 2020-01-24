@@ -415,14 +415,14 @@ def voiture_nouveau(request):
             marque=form['marque'],
             categorie=form['modele'],
             places=form['places'],
-            matricule=form['matricule'],)
+            matricule=form['matricule'],
 
-
+        chauffeur_id=form['chauffeur'])
 
         p.save()
         return redirect('voiture')
 
-    return render(request, 'taxi/admin/voiture-creer.html', {'chauffeurs': Employe.objects.filter(poste="CHAUFFEUR")})
+    return render(request, 'taxi/admin/voiture-creer.html', {'chauffeurs': Employe.objects.filter(poste="CHAUFFEUR").filter(voiture__isnull=True)})
 
 @login_required
 def voiture(request):
