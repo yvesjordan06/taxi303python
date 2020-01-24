@@ -67,15 +67,20 @@
                                            placeholder="Nombre de places">
                                 </div>
                             </div>
+                        {% if not programme %}
                             <div class="form-group row">
                                 <label for="programme"
-                                       class="col-sm-3 col-form-label">Programme</label><div class="col-sm-9"><select name="programme"  class="form-control" id="programme" required {% if not user.est_employer %} type="hidden" {% else %} type = "text" {% endif %}>
+                                       class="col-sm-3 col-form-label">Programme</label><div class="col-sm-9"><select name="programme"  class="form-control" id="programme" required type="text" {% if not user.est_employer %} disabled {% endif %}>
                                         {% for reservation in reservations %}
-                                            <option value="{{ reservation.id }} {% if programme and programme.id == reservation.id %} selected {% endif %}" >{{ reservation }}</option>
+                                            <option value="{{ reservation.id }} " >{{ reservation }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div>
+
+                            {% else %}
+                            <input type="hidden" name="programme" value="{{ programme.id }}">
+                        {% endif %}
 
                             <div class="form-group row">
                                 <label for="date"
