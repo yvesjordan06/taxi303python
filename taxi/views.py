@@ -121,7 +121,7 @@ def reservations_jour(request):
 def reservations_historique(request):
     reser = Reservation.objects.all()
     user: Utilisateur = request.user
-    if not user.is_superuser():
+    if not user.is_superuser:
         return reservations_client(request)
 
     return render(request, 'taxi/admin/reservations-complet.html', {'reservations': reser})
@@ -300,7 +300,15 @@ def expedition_nouveau(request):
 
 
 @login_required
-def expedition_terminer(request, id):
+def expedition_terminer(request):
+    exp = get_object_or_404(Expedition, pk=id)
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return redirect('expeditions')
+
+    return render(request, 'taxi/admin/expeditions-terminer.html', {})
+
+def expedition_complet(request, id):
     exp = get_object_or_404(Expedition, pk=id)
     user: Utilisateur = request.user
     if not user.est_employer():
