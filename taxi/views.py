@@ -360,13 +360,12 @@ def refuser(request, reservation_id):
     user: Utilisateur = request.user
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.statut = 'REFUSER'
-    user.chauffeur.voiture.places_occuper -= reservation.places
+    reservation.programme.voiture.places_occuper -= reservation.places
+    reservation.programme.voiture.save()
+    reservation.programme.save()
     reservation.save()
-    user.chauffeur.voiture.save()
-    user.chauffeur.save()
-    user.save()
 
-    return redirect(home)
+    return redirect(reservation)
 
 
 def supprimer(request, reservation_id):
