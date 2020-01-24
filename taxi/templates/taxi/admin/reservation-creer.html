@@ -69,9 +69,9 @@
                             </div>
                             <div class="form-group row">
                                 <label for="programme"
-                                       class="col-sm-3 col-form-label">Programme</label><div class="col-sm-9"><select name="programme" type="text" class="form-control" id="programme" required >
+                                       class="col-sm-3 col-form-label">Programme</label><div class="col-sm-9"><select name="programme"  class="form-control" id="programme" required {% if not user.est_employer %} type="hidden" {% else %} type = "text" {% endif %}>
                                         {% for reservation in reservations %}
-                                            <option value="{{ reservation.id }} {% if programme and programme.programme == reservation.id %} selected {% endif %}" >{{ reservation }}</option>
+                                            <option value="{{ reservation.id }} {% if programme and programme.id == reservation.id %} selected {% endif %}" >{{ reservation }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
