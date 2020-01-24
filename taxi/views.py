@@ -365,13 +365,13 @@ def refuser(request, reservation_id):
     reservation.programme.save()
     reservation.save()
 
-    return redirect(reservation)
+    return redirect("reservations")
 
 
 def supprimer(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
     reservation.delete()
-    return redirect(reservations)
+    return redirect("reservations")
 
 
 @login_required
