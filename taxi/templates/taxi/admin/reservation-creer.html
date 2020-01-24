@@ -31,7 +31,7 @@
                                        class="col-sm-3 col-form-label">Nom : </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="first_name" class="form-control" id="first_name"
-                                           placeholder="Nom " {% if not user.est_employe %} readonly value="{{ user.first_name }}" {% endif %}>
+                                           placeholder="Nom " {% if not user.est_employer %} readonly value="{{ user.first_name }}" {% endif %}>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -39,7 +39,7 @@
                                        class="col-sm-3 col-form-label">Prenom : </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="last_name" class="form-control" id="last_name"
-                                           placeholder="Prenom " {% if not user.est_employe %} readonly value="{{ user.last_name }}" {% endif %}>
+                                           placeholder="Prenom " {% if not user.est_employer %} readonly value="{{ user.last_name }}" {% endif %}>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -47,7 +47,7 @@
                                        class="col-sm-3 col-form-label">Numero de Telephone : </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="telephone" class="form-control" id="telephone"
-                                           placeholder="Numero de Telephone" {% if not user.est_employe %} readonly value="{{ user.telephone }}" {% endif %}>
+                                           placeholder="Numero de Telephone" {% if not user.est_employer %} readonly value="{{ user.telephone }}" {% endif %}>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -55,7 +55,7 @@
                                        class="col-sm-3 col-form-label">Numero de CNI</label>
                                 <div class="col-sm-9">
                                     <input name="cni" type="text" class="form-control" id="cni"
-                                           placeholder="Numero de CNI" {% if not user.est_employe %} readonly value="{{ user.cni }}" {% endif %}>
+                                           placeholder="Numero de CNI" {% if not user.est_employer %} readonly value="{{ user.cni }}" {% endif %}>
                                 </div>
                             </div>
                             <div class="form-group row">

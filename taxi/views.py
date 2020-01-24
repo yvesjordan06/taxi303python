@@ -298,10 +298,18 @@ def expedition_nouveau(request):
 
     return render(request, 'taxi/admin/expedition-creer.html', {})
 
+def gestion(request):
+
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return redirect('reservations')
+
+    return render(request, 'taxi/admin/gestion.html', {})
+
 
 @login_required
 def expedition_terminer(request):
-    exp = get_object_or_404(Expedition, pk=id)
+
     user: Utilisateur = request.user
     if not user.est_employer():
         return redirect('expeditions')
@@ -382,3 +390,41 @@ def programme_nouveau(request):
         return redirect(programme)
 
     return render(request, 'taxi/admin/programme-creer.html', {'voitures': Voiture.objects.all()})
+
+@login_required
+def voiture_nouveau(request):
+    user: Utilisateur = request.user
+    if not user.is_superuser:
+        return redirect('reservations')
+    if request.method == 'POST':
+        form = request.POST
+        p = Voiture(
+            marque=form['marque'],
+            categorie=form['modele'],
+            places=form['places'],
+            matricule=form['matricule'],
+
+        chauffeur_id=form['chauffeur'])
+
+        p.save()
+        return redirect('voiture')
+
+    return render(request, 'taxi/admin/voiture-creer.html', {'chauffeurs': Employe.objects.filter(poste="CHAUFFEUR")})
+
+@login_required
+def voiture(request):
+
+
+    voiture = Voiture.objects.all()
+
+    return render(request, 'taxi/admin/voiture.html', {'voitures': voiture})
+
+def voiture_supprimer(request, reservation_id):
+    reservation = get_object_or_404(Voiture, pk=reservation_id)
+    reservation.delete()
+    return redirect(voiture)
+
+def programme_supprimer(request, reservation_id):
+    reservation = get_object_or_404(Programme, pk=reservation_id)
+    reservation.delete()
+    return redirect(programme)

@@ -9,7 +9,7 @@
             <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-ticket"></i>
-                            </span> Ajouter un programme </h3>
+                            </span> Ajouter une Voiture </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
@@ -24,8 +24,8 @@
         {% if user.is_superuser %}
             <div class="col-12">
                             <span class="d-flex align-items-center purchase-popup">
-                                <p>Ajouter un programme ?</p>
-                                <a href="{% url 'programme.nouveau' %}"
+                                <p>Ajouter une voiture ?</p>
+                                <a href="{% url 'voiture.nouveau' %}"
                                    class="btn ml-auto download-button">Ajouter</a>
                             </span>
             </div>
@@ -35,46 +35,39 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"> Listes du jour</h4>
+                        <h4 class="card-title"> Listes des voitures</h4>
                         </p>
                         <table class="table ">
                             <thead>
 
                             <tr>
-                                <th> Depart</th>
-                                <th> Destination</th>
-                                <th> Voiture</th>
-                                <th> Categorie</th>
-                                <th> Tarif</th>
+                                <th> Marque</th>
+                                <th> Modele</th>
+                                <th> Places</th>
+                                <th> Chauffeur</th>
+                                <th> Immatriculation</th>
 
-                                <th> Heure Depart</th>
                                 <th> Action</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for programme in programmes %}
+                            {% for voiture in voitures %}
                                 <tr>
                                     <td class="py-1">
-                                        {{ programme.get_depart_display }}
+                                        {{ voiture.marque }}
                                     </td>
-                                    <td> {{ programme.get_arrive_display }} </td>
-                                    <td> {{ programme.voiture }} </td>
-                                    <td> {{ programme.get_type_display }} </td>
-                                    <td> {{ programme.tarif }} FCFA</td>
-                                    <td> {{ programme.get_heure_depart_display }} </td>
+                                    <td> {{ voiture.categorie }} </td>
+                                    <td> {{ voiture.places }} </td>
+                                    <td> {{ voiture.chauffeur }} </td>
+                                    <td> {{ voiture.matricule}} FCFA</td>
 
-                                    {% if user.is_superuser %}
+
                                     <td>
-                                        <a href="{% url "programme.supprimer" programme.id %}"><label
+                                        <a href="{% url "voiture.supprimer" voiture.id %}"><label
                                                 class="badge badge-danger col-sm-12">Supprimer</label></a>
                                     </td>
-                                    {% else %}
-                                        <td>
-                                        <a href="{% url "reservations.nouveau_id" programme.id %}"><label
-                                                class="badge badge-gradient-info col-sm-12">Reserver</label></a>
-                                    </td>
-                                {% endif %}
+
                                 </tr>
                             {% endfor %}
 

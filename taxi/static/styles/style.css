@@ -1,0 +1,196 @@
+.compart1{
+	height: 130px;
+	opacity: 0.8;
+}
+
+.debut{
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 50px;
+	color: white;
+	text-shadow: 1px 1px 1px white; 
+}
+.acceuil{
+	position: absolute;
+	margin-top: 100px; 
+	margin-left: 10px;
+	color: white; 
+}
+.propos{
+	position: absolute;
+	margin-top: 100px; 
+	margin-left: 100px;
+	color: white; 
+}
+.aide{
+	position: absolute;
+	margin-top: 100px; 
+	margin-left: 200px;
+	color: white
+}
+.deconnexion{
+	position: absolute;
+	margin-top: 20px; 
+	margin-left:1150px;
+	color: white
+}
+#sous-compart2{
+	height: 350px;
+	background-image: url(../images_taxi/bureau5.jpg);
+	background-opacity: 0.5;
+	opacity: 0.8;
+}
+.nav1{
+	height: 350px;
+}
+.M1{
+	margin-top: 0px;
+	background-color: grey;
+}
+.M2{
+	margin-top: 20px;
+	background-color: grey;
+
+}
+.M3{
+	margin-top: 20px;
+	background-color: grey;
+
+}
+.titre{
+	font-size: 25px;
+	text-align: center;
+	margin-top: 35px; 
+}
+#footer{
+	margin-top: 95px;
+}
+
+.ajoutvoiture{
+	width:280px;
+	text-align: center;
+	height: 30px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: relative;
+	margin-left: 845px;
+	margin-top: 50px;
+	margin-bottom: 70%; 
+	  
+}
+
+.colis{
+	width:250px;
+	text-align: center;
+	height: 50px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: relative;
+	margin-left: 830px;
+	margin-top: 20px;
+	margin-bottom: 72%; 
+}
+
+
+.verifier
+{
+	width:300px;
+	height: 30px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	margin-left: 340px;
+	color: white;
+	margin-top: 80px;
+	margin-bottom: 70%;
+}
+.lien{
+	color: #ffff;
+	font-size: 18px; 
+	text-decoration: none;
+}
+.voiture{
+	width:280px;
+	text-align: center;
+	height:30px;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: relative;
+	margin-left: 18px;
+	margin-top: 0px;
+}
+.pieces{
+	width:300px;
+	text-align: center;
+	height: 50px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	margin-left: 20px;
+	margin-top: 40px;
+}
+.garage{
+	width:300px;
+	text-align: center;
+	height: 35px;
+	margin-left: 0px;
+	margin-top: 30px;
+}
+.nettoyage{
+	width:300px;
+	text-align: center;
+	height: 35px;
+	margin-left: 840px;
+	margin-top: 0px;
+}
+.reparer{
+	width:300px;
+	text-align: center;
+	height: 35px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 30px;
+}
+.supprimer{
+	width: 300px;
+	height: 65px;
+	position: absolute;
+	margin-left: 18px;
+	margin-top: 100px
+}
+.huile{
+	width: 300px;
+	height: 65px;
+	position: absolute;
+	margin-left: 835px;
+	margin-top: 0px;
+	margin-bottom: 16px;
+}
+
+#compart2{
+	height: 400px;
+	position: relative;
+	width: 100%;
+	margin-left: 0%; 
+	margin-top: 0;
+	background-color: white;
+}
+
+.menu{
+    width: 200px;
+    height: 505px;
+    position: absolute;
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+.compart1{
+	background-color: #00BCD4;
+	height: 120px;
+
+}
+
+.compart3{
+	height: 130px;
+	background-color: #00BCD4;
+}

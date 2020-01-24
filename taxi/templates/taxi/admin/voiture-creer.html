@@ -1,0 +1,85 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %} NOUVELLE VOITURE{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-train-variant"></i>
+                            </span> Voiture </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Ajouter une voiture <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ajouter une voiture</h4>
+                        <form class="forms-sample" method="post" action="{% url "voiture.nouveau" %}">
+                        {% csrf_token %}
+                            <h2 class="card-subtitle">Voiture</h2>
+                            <div class="form-group row">
+                                <label for="first_name"
+                                       class="col-sm-3 col-form-label">Marque : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="marque" class="form-control" id="marque"
+                                           placeholder="Marque " required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="last_name"
+                                       class="col-sm-3 col-form-label">Modele : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="modele" class="form-control" id="modele"
+                                           placeholder="Modele " required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="matricule"
+                                       class="col-sm-3 col-form-label">Immatriculation : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="matricule" class="form-control" id="matricule"
+                                           placeholder="Numero de Immatriculation" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="places"
+                                       class="col-sm-3 col-form-label">Nombre de places</label>
+                                <div class="col-sm-9">
+                                    <input name="places" type="text" class="form-control" id="places"
+                                           placeholder="Nombre de places" value="70" min="5">
+                                </div>
+                            </div>
+                            <h2 class="card-subtitle">Chauffeur</h2>
+                            <div class="form-group row">
+                                <label for="chauffeur"
+                                       class="col-sm-3 col-form-label">Contenu</label>
+                                <div class="col-sm-9">
+                                    <select name="chauffeur" type="text" class="form-control" id="chauffeur"
+                                    >
+                                        {% for chauffeur in chauffeurs %}
+                                            <option value="{{ chauffeur.id }}">{{ chauffeur }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

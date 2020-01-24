@@ -26,6 +26,15 @@ urlpatterns = [
 
     path('programme', views.programme, name='programme'),
     path('programme/nouveau', views.programme_nouveau, name='programme.nouveau'),
+    path('programme/supprimer/<int:reservation_id>/', views.programme_supprimer, name='programme.supprimer'),
+
+    path('voiture', views.voiture, name='voiture'),
+    path('voiture/nouveau', views.voiture_nouveau, name='voiture.nouveau'),
+    path('voiture/supprimer/<int:reservation_id>/', views.voiture_supprimer, name='voiture.supprimer'),
+    path('gestion', views.gestion, name='gestion'),
+
+    #path('expeditions/nouveau', views.expedition_nouveau, name='expeditions.nouveau'),
+    #path('expeditions/terminer', views.expedition_terminer, name='expeditions.terminer'),
 
 
 

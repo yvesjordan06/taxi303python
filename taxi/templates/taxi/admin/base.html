@@ -9,6 +9,8 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href="{% static "assets/vendors/mdi/css/materialdesignicons.min.css" %}">
     <link rel="stylesheet" href="{% static "assets/vendors/css/vendor.bundle.base.css" %}">
+    <link rel="stylesheet" href="{% static "styles/W3.css" %}">
+    <link rel="stylesheet" href="{% static "styles/style.css" %}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -103,6 +105,13 @@
                     <a class="nav-link" href="{% url 'home' %}">
                         <span class="menu-title">Tableau de bord</span>
                         <i class="mdi mdi-home menu-icon"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gestion' %}">
+                        <span class="menu-title">Gestion</span>
+                        <i class="mdi mdi-truck menu-icon"></i>
                     </a>
                 </li>
 

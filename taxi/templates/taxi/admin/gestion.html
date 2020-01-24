@@ -1,0 +1,94 @@
+{% extends 'taxi/admin/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% load static %}
+
+        <div class="content-wrapper">
+
+
+		<header class="w3-container" style=" opacity: 0.7;">
+  			<span class="w3-opennav w3-xlarge w3-hide-large" onclick="w3_open()">☰</span>
+  			<h2 style="text-align: center;">Gestion des stocks et approvisionnements</h2>
+		</header>
+
+		<div class="w3-container" id="sous-compart2">
+
+	<! Les codes des differents formulaires produits par ces boutons se trouvent au pieds de page>
+
+
+			<div class="btn-gradient-primary voiture">
+
+					<a href="{% url "voiture.nouveau" %}"  class="lien"> Ajouter une nouvelle voiture  </a>
+
+			</div>
+
+	<div class=" pieces">
+
+		<a href="Acheter_pieces.html" class="lien" > Acheter les pièces détachés des véhicules </a>
+		<div class="verifier btn-gradient-primary">
+			<a href="{% url "voiture" %} "  class=" lien"> Vérifier les vehicule</a>
+
+		</div>
+
+
+			<a href="{% url "expeditions" %}" >
+        <div style="position: absolute; right: 0"  class="btn-gradient-primary colis">
+        Effectuer la livraison d'un colis
+    </div>
+        </a>
+	</div>
+
+	<div class="garage">
+		<p>
+
+			<button onclick="document.getElementById('garage').style.display='block'" class="w3-btn" style="margin-left: 0px; position: relative; background-color: rgba(0, 0, 0, 0.8); height: 35px;" >
+		 		Envoyer un véhicule au garage
+		 	</button>
+		</p>
+
+
+		<div class="nettoyage">
+			<p>
+
+				<button onclick="document.getElementById('nettoyage').style.display='block'" class="w3-btn" style="right: 8px; position: absolute; background-color: rgba(0, 0, 0, 0.8); height: 35px;" >
+				 	Acheter du matériel de nettoyage
+				</button>
+			</p>
+		</div>
+
+	</div>
+
+
+	<div class="reparer" style="color: white;">
+		<a href="{% url "voiture" %}" onclick="document.getElementById('reparer').style.display='block'" class="btn btn-gradient-primary" style="margin-left: 0px; position: relative; background-color: rgba(0, 0, 0, 0.8); height: 35px;" >
+		 Enlever un véhicule du garage
+		</a>
+
+
+
+	</div>
+
+            <div style="position: absolute; right:0; margin-top: 64px" class="huile" >
+			<button onclick="document.getElementById('huile').style.display='block'" class="w3-btn" style="background-color: rgba(0, 0, 0, 0.8); height: 35px;" >
+		 		S'apprivisionner en hydrocarbure
+			</button>
+		</div>
+	<div class="btn-gradient-secondary supprimer">
+		<button onclick="document.getElementById('supprimer').style.display='block'" class="w3-btn" style="margin-left: 0px; position: relative; background-color: rgba(0, 0, 0, 0.8); height: 35px;" >
+		 Supprimer un véhicule du circuit
+		</button>
+
+	</div>
+
+
+</div>
+
+	<footer class="w3-container" style=" opacity: 0.7;">
+  		<h5><i>Effectuez aisement toutes les taches liées à la gestion des stocks</i></h5>
+  		<p style="margin-left: 950px;">Gestion informatique
+	</footer>
+
+
+    </div>
+
+{% endblock %}
