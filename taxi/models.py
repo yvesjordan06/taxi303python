@@ -28,19 +28,19 @@ POSTE_CHOICES = (
 )
 
 CHOICES_VILLE = (
-    ("YDE", "Yaounde"),
-    ("DLA", "Douala"),
-    ("BAF", "Baffoussam"),
-    ("BDA", "Bamenda"),
-    ("BDJ", "Bandjoun"),
+    ("YDE","Yaounde"),
+    ("DLA","Douala"),
+    ("BAF","Baffoussam"),
+    ("BDA","Bamenda"),
+    ("BDJ","Bandjoun"),
 )
 
 CHOICES_HEURES = (
-    ("6", "6h"),
-    ("10", "10h"),
-    ("14", "14h"),
-    ("19", "19h"),
-    ("22", "22h"),
+    ("6","6h"),
+    ("10","10h"),
+    ("14","14h"),
+    ("19","19h"),
+    ("22","22h"),
 )
 
 RESERVATION_STATUS = (
@@ -82,7 +82,7 @@ class UserManager(BaseUserManager):
         )
         user.is_superuser = True
         user.is_admin = True
-        user.is_staff = True
+        user.is_staff= True
         user.save(using=self._db)
 
         print(user.is_superuser);
@@ -165,8 +165,8 @@ class Programme(models.Model):
     tarif = models.IntegerField()
 
     def get_heure_depart_display(self):
-        return f"{self.heure_depart.hour} H {self.heure_depart.minute if self.heure_depart.minute > 9 else '0' + str(
-            self.heure_depart.minute)}" if self.heure_depart else "Pas d'horaire"
+
+        return f"{self.heure_depart.hour} H {self.heure_depart.minute if self.heure_depart.minute > 9 else '0'+str(self.heure_depart.minute)}" if self.heure_depart else "Pas d'horaire"
     def __str__(self):
         return f'Depart: {self.get_depart_display()}, Arrive: {self.get_arrive_display()}, Tarif: {self.tarif} FCFA, Heure: {self.get_heure_depart_display()}, Type: {self.get_type_display()}, Places: {self.voiture.place_dispo()}'
 
@@ -183,13 +183,12 @@ class Reservation(models.Model):
     date_depart = models.DateField('Created at', default=timezone.now().date())
 
     def __str__(self):
-        return f"Client : {self.client.user}, Depart: {self.date_depart}, Par: {self.guichetier.user if self.guichetier else 'Aucun'}"
+        return f"Client : {self.client.user}, Depart: {self.date_depart}, Par: {self.guichetier.user if self.guichetier else 'Aucun' }"
 
     def montant(self):
         return self.places * self.programme.tarif
     def est_aujourdhui(self):
-        return (self.date_depart.day, self.date_depart.month, self.date_depart.year) == (
-        timezone.now().day, timezone.now().month, timezone.now().year)
+        return (self.date_depart.day, self.date_depart.month, self.date_depart.year) == (timezone.now().day, timezone.now().month, timezone.now().year)
 
 class Colis(models.Model):
     nom = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
@@ -201,3 +200,5 @@ class Expedition(models.Model):
     arrive = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
     tarif = models.IntegerField()
     livree = models.BooleanField(default=False, blank=False)
+
+
