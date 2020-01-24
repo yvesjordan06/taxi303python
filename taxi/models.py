@@ -179,6 +179,7 @@ class Reservation(models.Model):
         MinValueValidator(1)
     ])
     client = models.ForeignKey(Client, null=False, on_delete=models.CASCADE)
+
     guichetier = models.ForeignKey(Employe, null=True, on_delete=models.SET_NULL, default=None)
     created_at = models.DateTimeField('Created at', default=timezone.now())
     jour_depart = models.CharField(max_length=64, choices=JOURS_CHOICES, default=timezone.now().weekday())

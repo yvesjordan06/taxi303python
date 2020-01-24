@@ -415,9 +415,9 @@ def voiture_nouveau(request):
             marque=form['marque'],
             categorie=form['modele'],
             places=form['places'],
-            matricule=form['matricule'],
+            matricule=form['matricule'],)
 
-        chauffeur_id=form['chauffeur'])
+
 
         p.save()
         return redirect('voiture')
