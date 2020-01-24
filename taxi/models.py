@@ -156,7 +156,6 @@ class Voiture(models.Model):
     def est_plein(self):
         return self.places == self.places_occuper
 
-
 class Programme(models.Model):
     depart = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
     arrive = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
@@ -168,7 +167,6 @@ class Programme(models.Model):
     def get_heure_depart_display(self):
         return f"{self.heure_depart.hour} H {self.heure_depart.minute if self.heure_depart.minute > 9 else '0' + str(
             self.heure_depart.minute)}" if self.heure_depart else "Pas d'horaire"
-
     def __str__(self):
         return f'Depart: {self.get_depart_display()}, Arrive: {self.get_arrive_display()}, Tarif: {self.tarif} FCFA, Heure: {self.get_heure_depart_display()}, Type: {self.get_type_display()}, Places: {self.voiture.place_dispo()}'
 
@@ -189,16 +187,13 @@ class Reservation(models.Model):
 
     def montant(self):
         return self.places * self.programme.tarif
-
     def est_aujourdhui(self):
         return (self.date_depart.day, self.date_depart.month, self.date_depart.year) == (
         timezone.now().day, timezone.now().month, timezone.now().year)
 
-
 class Colis(models.Model):
     nom = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
     client = models.ForeignKey(Client, null=False, on_delete=models.CASCADE)
-
 
 class Expedition(models.Model):
     colis = models.ForeignKey(Colis, null=False, on_delete=models.CASCADE)
