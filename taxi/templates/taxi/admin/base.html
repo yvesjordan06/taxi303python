@@ -47,10 +47,11 @@
                         </div>
                     </a>
                     <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-
+{% if user.is_superuser %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/admin">
                             <i class="mdi mdi-set mr-2 text-primary"></i> Admin Account </a>
+                        {% endif %}
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">
@@ -88,44 +89,56 @@
                             <span class="font-weight-bold mb-2">{{ user.get_full_name }}</span>
                             {% if user.is_superuser %}
                                 <span class="text-secondary text-small">Chef D'agence</span>
-                            {% else %}
+                            {% elif user.est_employe %}
                                 <span class="text-secondary text-small">{{ user.employe.get_poste_display }}</span>
+                                {% else %}
+                                <span class="text-secondary text-small">Client</span>
                             {% endif %}
 
                         </div>
                     </a>
                 </li>
+            {% if user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">
                         <span class="menu-title">Tableau de bord</span>
                         <i class="mdi mdi-home menu-icon"></i>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'employer' %}">
                         <span class="menu-title">Employés</span>
                         <i class="mdi mdi-account-multiple menu-icon"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+
+            {% endif %}
+            <li class="nav-item">
                     <a class="nav-link" href="{% url 'reservations' %}">
                         <span class="menu-title">Reservations</span>
                         <i class="mdi mdi-ticket menu-icon"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'expeditions' %}">
-                        <span class="menu-title">Expedition</span>
-                        <i class="mdi mdi-train-variant menu-icon"></i>
-                    </a>
-                </li>
-                </li>
-                <li class="nav-item">
+             <li class="nav-item">
                     <a class="nav-link" href="{% url 'programme' %}">
                         <span class="menu-title">Programme</span>
                         <i class="mdi mdi-train menu-icon"></i>
                     </a>
                 </li>
+
+
+            {% if user.is_staff %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'expeditions' %}">
+                        <span class="menu-title">Expedition</span>
+                        <i class="mdi mdi-train-variant menu-icon"></i>
+                    </a>
+
+                </li>
+            {% endif %}
+
 
             </ul>
         </nav>

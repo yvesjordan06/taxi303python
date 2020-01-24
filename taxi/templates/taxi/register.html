@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>registration</title>
+
+
+    <!-- Main CSS-->
+    <link href="{% static "register/css/main.css" %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Créez votre compte client</h2>
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder="Nom" name="first_name">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder="Prenom" name="last_name">
+                        </div>
+
+
+                         <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder=" Phone" name="telephone" required>
+                        </div>
+                         <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder=" Numero de CNI" name="cni" required>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <input class="input--style-1" type="Password" placeholder="Mot de passe" name="password">
+                                </div>
+                            </div>
+                        </div>
+
+                                                <div class="row row-space">
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <input class="input--style-1" type="Password" placeholder="Confirmer le mot de passe" name="confirm_password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-20">
+                            <button class="btn btn--radius btn--green" type="submit">Create</button>
+                        </div>
+                    </form>
+                    <p>
+                    		<a href="{% url "login" %}">Vous avez deja un compte?</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+
+    <!-- Main JS-->
+    <script src="{% static "register/js/global.js" %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

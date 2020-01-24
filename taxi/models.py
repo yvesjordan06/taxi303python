@@ -187,6 +187,10 @@ class Reservation(models.Model):
 
     def montant(self):
         return self.places * self.programme.tarif
+
+    def statut(self):
+        return "En attente" if not self.guichetier else "Accepte"
+
     def est_aujourdhui(self):
         return (self.date_depart.day, self.date_depart.month, self.date_depart.year) == (timezone.now().day, timezone.now().month, timezone.now().year)
 

@@ -1,19 +1,55 @@
-{% extends 'taxi/base.html' %}
-{% block content %}
-    <div class="row">
-        <div class="col s12 m6 offset-m3">
-            <div class="card">
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
 
-                <div class="card-content">
-        <h2>Connexion</h2>
-        <form method="POST" class="post-form">{% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="save btn btn-default cyan">Se Connecter</button>
-        </form>
-    </div>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Login</title>
+
+    <!-- Icons font CSS-->
+
+    <!-- Main CSS-->
+    <link href="{% static "login/css/main.css" %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3" >
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title" style="color: black;">Se connecter</h2>
+                    <form method="POST" action="{% url "login" %}">
+                        {% csrf_token %}
+                        <div class="input-group" >
+                            <input class="input--style-3" type="text" placeholder="Numero de telephone" name="telephone" required>
+                        </div>
+                         <div class="input-group">
+                            <input class="input--style-3" type="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="p-t-10" >
+                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        </div>
+                        <br>
+                        <P> <a href="{% url "register" %}"> Créer un nouveau compte?</a></P>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
 
-{% endblock %}
+    <!-- Main JS-->
+    <script src="{% static "login/js/global.js" %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
