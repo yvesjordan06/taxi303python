@@ -45,6 +45,8 @@ CHOICES_HEURES = (
 
 RESERVATION_STATUS = (
     ("ATTENTE", "Attente"),
+    ("REFUSER", "Refuser"),
+    ("ACCEPER", "Accepter"),
     ("EN COUR", "Encour"),
     ("TERMINER", "Terminer"),
 
@@ -181,6 +183,7 @@ class Reservation(models.Model):
     created_at = models.DateTimeField('Created at', default=timezone.now())
     jour_depart = models.CharField(max_length=64, choices=JOURS_CHOICES, default=timezone.now().weekday())
     date_depart = models.DateField('Created at', default=timezone.now().date())
+    statut = models.CharField(max_length=64, choices=RESERVATION_STATUS, null=False, default='ATTENTE')
 
     def __str__(self):
         return f"Client : {self.client.user}, Depart: {self.date_depart}, Par: {self.guichetier.user if self.guichetier else 'Aucun' }"
@@ -188,7 +191,7 @@ class Reservation(models.Model):
     def montant(self):
         return self.places * self.programme.tarif
 
-    def statut(self):
+    def _statut(self):
         return "En attente" if not self.guichetier else "Accepte"
 
     def est_aujourdhui(self):

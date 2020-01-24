@@ -40,5 +40,6 @@ urlpatterns = [
 
     path('prendre/<int:reservation_id>/', views.prendre, name='prendre'),
     path('supprimer/<int:reservation_id>/', views.supprimer, name='supprimer'),
+    path('refuser/<int:reservation_id>/', views.refuser, name='refuser'),
     path('terminer/<int:reservation_id>/', views.terminer, name='terminer'),
 ]

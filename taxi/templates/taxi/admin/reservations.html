@@ -98,8 +98,8 @@
     {% if user.est_employer %}
                                     <td><a href="{% url 'prendre' reservation.id %}"><label
                                             class="badge badge-success col-sm-6">Approuver</label></a>
-                                     <a href="{% url 'supprimer' reservation.id %}"><label
-                class="badge badge-danger col-sm-6">Supprimer</label></a></td>
+                                     <a href="{% url 'refuser' reservation.id %}"><label
+                class="badge badge-gradient-light col-sm-6">Refuser</label></a></td>
 
 
         {% else %}

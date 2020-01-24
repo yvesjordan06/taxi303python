@@ -333,6 +333,7 @@ def prendre(request, reservation_id):
 
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.guichetier = user.employe
+    reservation.statut = 'ACCEPTER'
     p = reservation.programme
     p.voiture.places_occuper = p.voiture.places_occuper + int(reservation.places)
     p.voiture.save()
@@ -348,6 +349,18 @@ def terminer(request, reservation_id):
     reservation.statut = 'TERMINER'
     user.chauffeur.voiture.places_occuper -= reservation.places
     user.chauffeur.statut = 'ON'
+    reservation.save()
+    user.chauffeur.voiture.save()
+    user.chauffeur.save()
+    user.save()
+
+    return redirect(home)
+
+def refuser(request, reservation_id):
+    user: Utilisateur = request.user
+    reservation = Reservation.objects.get(pk=reservation_id)
+    reservation.statut = 'REFUSER'
+    user.chauffeur.voiture.places_occuper -= reservation.places
     reservation.save()
     user.chauffeur.voiture.save()
     user.chauffeur.save()

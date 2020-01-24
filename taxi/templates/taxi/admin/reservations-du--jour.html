@@ -44,7 +44,7 @@
                                 <th> Places</th>
                                 <th> Tarif</th>
                                 <th> Heure Depart</th>
-                                <th> Action</th>
+                                {% comment %}<th> Action</th>{% endcomment %}
 
                             </tr>
                             </thead>
@@ -61,11 +61,12 @@
                                     <td> {{ reservation.montant }} </td>
                                     <td> {{ reservation.programme.get_heure_depart_display }} </td>
 
-
+{% comment %}
                                     <td>
                                         <a href="{% url 'supprimer' reservation.id %}"><label
                                                 class="badge badge-danger col-sm-12">Supprimer</label></a>
                                     </td>
+                                    {% endcomment %}
                                 </tr>
                             {% endfor %}
 
