@@ -44,7 +44,7 @@
                         <h4 class="font-weight-normal mb-3">Masse salariale <i
                                 class="mdi mdi-cash-multiple mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">FCFA 1.500.0000</h2>
+                        <h2 class="mb-5">FCFA {{ salaire }}</h2>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <h4 class="font-weight-normal mb-3">Nombre d'employés<i
                                 class="mdi mdi-account-multiple mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">45</h2>
+                        <h2 class="mb-5">{{ employer }}</h2>
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                         <h4 class="font-weight-normal mb-3">Reservation Aujourd'hui <i
                                 class="mdi mdi-metronome-tick mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">320 Reservation</h2>
-                        <h2 class="mb-5">FCFA 1.500.0000</h2>
+                        <h2 class="mb-5">{{ reservation_aujourdhui }}</h2>
+                        <h2 class="mb-5">FCFA {{ reservation_montant }}</h2>
                     </div>
                 </div>
             </div>
@@ -84,8 +84,8 @@
                         <h4 class="font-weight-normal mb-3">Nombre d'expeditions<i
                                 class="mdi mdi-train-variant mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">32 Expeditions</h2>
-                        <h2 class="mb-5">FCFA 800.400</h2>
+                        <h2 class="mb-5">{{ colis }} Expeditions</h2>
+                        <h2 class="mb-5">FCFA {{ colis_montant }}</h2>
                     </div>
                 </div>
             </div>

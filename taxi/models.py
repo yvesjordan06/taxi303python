@@ -199,7 +199,7 @@ class Reservation(models.Model):
         return (self.date_depart.day, self.date_depart.month, self.date_depart.year) == (timezone.now().day, timezone.now().month, timezone.now().year)
 
 class Colis(models.Model):
-    nom = models.CharField(max_length=64, choices=CHOICES_VILLE, null=False, )
+    nom = models.CharField(max_length=64, null=False, )
     client = models.ForeignKey(Client, null=False, on_delete=models.CASCADE)
 
 class Expedition(models.Model):

@@ -24,7 +24,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ajouter un colis</h4>
-                        <form class="forms-sample">
+                        <form class="forms-sample" method="post" action="{% url 'expeditions.nouveau' %}">
+                            {% csrf_token %}
                             <h2 class="card-subtitle">Expediteur</h2>
                             <div class="form-group row">
                                 <label for="first_name"
@@ -63,16 +64,37 @@
                                 <label for="contenu"
                                        class="col-sm-3 col-form-label">Contenu</label>
                                 <div class="col-sm-9">
-                                    <input name="programme" type="text" class="form-control" id="contenu"
-                                           placeholder="contenu">
+                                    <input name="contenu" type="text" class="form-control" id="contenu"
+                                           placeholder="Contenu">
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="depart"
+                                       class="col-sm-3 col-form-label">Depart</label>
+                                 <div class="col-sm-9">
+                                    <select type="text" name="depart" class="form-control" id="depart"
+                                            placeholder="Depart " required>
+                                        <option value="YDE">Yaounde</option>
+                                        <option value="DLA">Douala</option>
+                                        <option value="BDA">Bamenda</option>
+                                        <option value="BAF">Baffoussam</option>
+                                        <option value="BDJ">Bandjoun</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="destination"
                                        class="col-sm-3 col-form-label">Destination</label>
-                                <div class="col-sm-9">
-                                    <input name="destination" , type="text" , value="Aujourd'hui" , class="form-control"
-                                           placeholder="Destination"/>
+                                 <div class="col-sm-9">
+                                    <select type="text" name="destination" class="form-control" id="destination"
+                                            placeholder="Destination " required>
+                                        <option value="YDE">Yaounde</option>
+                                        <option value="DLA">Douala</option>
+                                        <option value="BDA">Bamenda</option>
+                                        <option value="BAF">Baffoussam</option>
+                                        <option value="BDJ">Bandjoun</option>
+                                    </select>
                                 </div>
                             </div>
 

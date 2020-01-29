@@ -29,9 +29,30 @@ def home(request):
 
     if not user.is_staff:
         return redirect("programme")
+    res_todays = Reservation.objects.filter(date_depart=datetime.datetime.now().date())
+    res_today = res_todays.count()
+    res_prix = 0;
+    for i in res_todays:
+        res_prix += i.montant()
 
+    colis_todays = Expedition.objects.all()
+    colis_today = colis_todays.count()
+    colis_prix = 0;
+    for i in colis_todays:
+        colis_prix += i.tarif
+
+    employer_todays = Employe.objects.all()
+    employer_today = employer_todays.count()
+    employer_prix = 0;
+    for i in employer_todays:
+        employer_prix += i.salaire
     return render(request, 'taxi/admin/index.html', {
-
+        'reservation_aujourdhui':res_today,
+        'reservation_montant':res_prix,
+        'colis': colis_today,
+        'colis_montant': colis_prix,
+        'employer': employer_today,
+        'salaire': employer_prix,
     })
 
 
@@ -103,19 +124,19 @@ def inscription(request):
 @login_required
 def reservations(request):
     user: Utilisateur = request.user
-    reser = Reservation.objects.filter(jour_depart=timezone.now().weekday()).filter(
-        guichetier__date_embauche__isnull=True) if user.est_employer() else Reservation.objects.filter(client=user.client)
+    reser = Reservation.objects.filter(date_depart=datetime.datetime.now().date()).filter(
+        guichetier__isnull=True) if user.est_employer() else Reservation.objects.filter(client=user.client)
 
 
 
-    return render(request, 'taxi/admin/reservations.html', {'reservations': reser})
+    return render(request, 'taxi/admin/reservations.html', {'reservations': reser, 'today':datetime.datetime.now().date()})
 
 
 def reservations_jour(request):
     user: Utilisateur = request.user
     if not user.est_employer():
         return reservations(request)
-    reser = Reservation.objects.filter(jour_depart=timezone.now().weekday())
+    reser = Reservation.objects.filter(date_depart=datetime.datetime.now().date())
     return render(request, 'taxi/admin/reservations-du--jour.html', {'reservations': reser})
 
 
@@ -286,8 +307,8 @@ def expedition(request):
     user: Utilisateur = request.user
     if not user.est_employer():
         return redirect('reservations')
-
-    return render(request, 'taxi/admin/expeditions.html', {})
+    expedition = Expedition.objects.filter(livree=False)
+    return render(request, 'taxi/admin/expeditions.html', {'expeditions':expedition})
 
 
 @login_required
@@ -297,7 +318,51 @@ def expedition_nouveau(request):
     if not user.est_employer():
         return redirect('expeditions')
 
-    return render(request, 'taxi/admin/expedition-creer.html', {})
+    if request.method == "POST":
+        form = request.POST
+        print(form)
+        first_name = form['first_name'] or 'Client Inconnu'
+        last_name = form['last_name'] or 'Client Inconnu'
+        telephone = form['telephone'] or 'Client Inconnu'
+        cni = form['cni']
+        destination = form['destination']
+        depart = form['depart']
+        contenue = form['contenu']
+
+
+
+        try:
+            user = Utilisateur.objects.get(cni__exact=cni)
+        except:
+            user = Utilisateur(
+                first_name=first_name,
+                last_name=last_name,
+                telephone=telephone,
+                cni=cni
+            )
+            user.set_password(cni)
+            user.save()
+
+        client, created = Client.objects.get_or_create(user=user)
+
+        colis = Colis(
+            client=client,
+            nom=contenue
+        )
+        colis.save()
+
+        expedition = Expedition(
+            colis=colis,
+            depart=depart,
+            arrive=destination,
+            tarif=7000,
+            livree=False
+        )
+        expedition.save()
+
+        return redirect('expeditions')
+    else:
+      return render(request, 'taxi/admin/expedition-creer.html', {})
 
 def gestion(request):
 
@@ -315,16 +380,30 @@ def expedition_terminer(request):
     if not user.est_employer():
         return redirect('expeditions')
 
-    return render(request, 'taxi/admin/expeditions-terminer.html', {})
+    return render(request, 'taxi/admin/expeditions-terminer.html', {'expeditions':Expedition.objects.filter(livree=True)})
 
 def expedition_complet(request, id):
+
+    user: Utilisateur = request.user
+    if not user.est_employer():
+        return redirect('expeditions')
     exp = get_object_or_404(Expedition, pk=id)
+    exp.livree = True
+    exp.save()
+
+    #return render(request, 'taxi/admin/expeditions-terminer.html', {})
+    return redirect('expeditions')
+
+def expedition_supprimer(request, id):
     user: Utilisateur = request.user
     if not user.est_employer():
         return redirect('expeditions')
 
-    return render(request, 'taxi/admin/expeditions-terminer.html', {})
+    exp = get_object_or_404(Expedition, pk=id)
+    exp.delete()
 
+    #return render(request, 'taxi/admin/expeditions-terminer.html', {})
+    return redirect('expeditions')
 
 def prendre(request, reservation_id):
     user: Utilisateur = request.user

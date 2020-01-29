@@ -56,7 +56,7 @@
                                     <td> FCFA {{ employee.salaire }} </td>
                                     <td><a href="{% url 'employer.detail' employee.id %}"><label
                                             class="badge badge-success col-sm-6">Info</label></a>
-                                        <a href="{% url 'employer.salaire' %}"><label
+                                        <a href="{% url 'employer.salaire' employee.id %}"><label
                                                 class="badge badge-danger col-sm-6">Bulettin de
                                             paie</label></a>
                                     </td>

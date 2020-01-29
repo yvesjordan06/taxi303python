@@ -37,7 +37,7 @@
                         <table class="table ">
                             <thead>
                             <tr>
-                                <th> User</th>
+                                <th> Client</th>
                                 <th> Nom</th>
                                 <th> Depart</th>
                                 <th> Destination</th>
@@ -46,36 +46,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                             {% for expedition in expeditions %}
+                                <tr>
                                 <td class="py-1">
-                                    John Doe
+                                    {{ expedition.colis.client }}
                                 </td>
-                                <td> Sack de Macabo</td>
-                                <td> Yaounde</td>
-                                <td> Douala</td>
-                                <td> 7000 FCFA</td>
+                                <td> {{ expedition.colis.nom }}</td>
+                                <td> {{ expedition.depart }}</td>
+                                <td> {{ expedition.arrive }}</td>
+                                <td> {{ expedition.tarif }} FCFA</td>
+                                </tr>
+                             {% endfor %}
 
-                            </tr>
-                            <tr>
-                                <td class="py-1">
-                                    John Doe
-                                </td>
-                                <td> Sack de Macabo</td>
-                                <td> Yaounde</td>
-                                <td> Douala</td>
-                                <td> 7000 FCFA</td>
-
-                            </tr>
-                            <tr>
-                                <td class="py-1">
-                                    John Doe
-                                </td>
-                                <td> Sack de Macabo</td>
-                                <td> Yaounde</td>
-                                <td> Douala</td>
-                                <td> 7000 FCFA</td>
-
-                            </tr>
                             </tbody>
                         </table>
                     </div>

@@ -42,7 +42,7 @@
                                 <th> Arrive</th>
                                 <th> Places</th>
                                 <th> Tarif</th>
-                                <th> Heure Depart</th>
+                                <th> Date Depart</th>
                                 <th> Categorie</th>
                                 <th> Jour Voyage</th>
 
@@ -60,9 +60,9 @@
                                     <td> {{ reservation.programme.get_arrive_display }} </td>
                                     <td> {{ reservation.places }} </td>
                                     <td> {{ reservation.montant }} </td>
-                                    <td> {{ reservation.programme.get_heure_depart_display }} </td>
+                                    <td> {{ reservation.date_depart }} </td>
                                     <td> {{ reservation.programme.get_type_display }} </td>
-                                    <td> {{ reservation.get_jour_depart_display }} </td>
+                                    <td> {{ reservation.get_jour_depart_display }} {{ reservation.programme.get_heure_depart_display }} </td>
                                     {% comment %} <td> {{ reservation.created_at |date:"d m, Y" }} </td> {% endcomment %}
 
 

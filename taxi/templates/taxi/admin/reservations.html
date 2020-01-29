@@ -70,6 +70,7 @@
                                 <th> Places</th>
                                 <th> Tarif</th>
                                 <th> Heure Depart</th>
+                                <th> Date Depart</th>
                             {% if not user.est_employer %}
                                 <th> Statut</th>
                             {% endif %}
@@ -91,20 +92,33 @@
                                     <td> {{ reservation.places }} </td>
                                     <td> {{ reservation.montant }} FCFA</td>
                                     <td> {{ reservation.programme.get_heure_depart_display }} </td>
+                                    <td> {{ reservation.date_depart }} </td>
                                 {% if not user.est_employer %}
-                                    <td> {{ reservation.statut }} </td>
+
+                                    <td>    {% if reservation.date_depart < today %}
+           EXPIREE
+                  {% else %}
+               {{ reservation.statut }}
+            {% endif %} </td>
                                 {% endif %}
 
     {% if user.est_employer %}
                                     <td><a href="{% url 'prendre' reservation.id %}"><label
                                             class="badge badge-success col-sm-6">Approuver</label></a>
                                      <a href="{% url 'refuser' reservation.id %}"><label
-                class="badge badge-gradient-light col-sm-6">Refuser</label></a></td>
+                class="badge badge-gradient-primary col-sm-6">Refuser</label></a></td>
 
 
         {% else %}
-        <td><a href="{% url 'supprimer' reservation.id %}"><label
-                class="badge badge-danger">Supprimer</label></a></td>
+
+        <td><a href="{% url 'supprimer' reservation.id %}">
+             {% if reservation.date_depart < today %}
+            <label class="badge badge-danger">Supprimer</label>
+                  {% else %}
+              <label class="badge badge-gradient-danger">Annuler</label>
+            {% endif %}
+        </a></td>
+
                                         {% endif %}
 
                                 </tr>

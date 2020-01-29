@@ -18,11 +18,14 @@ urlpatterns = [
     path('employer', views.employer, name='employer'),
     path('employer/nouveau', views.employer_nouveau, name='employer.nouveau'),
     path('employer/detail/<int:employer_id>', views.employer_detail, name='employer.detail'),
-    path('employer/salaire', views.employer_salaire, name='employer.salaire'),
+    path('employer/salaire/<int:employer_id>', views.employer_salaire, name='employer.salaire'),
 
     path('expeditions', views.expedition, name='expeditions'),
     path('expeditions/nouveau', views.expedition_nouveau, name='expeditions.nouveau'),
     path('expeditions/terminer', views.expedition_terminer, name='expeditions.terminer'),
+    path('expeditions/completer/<int:id>', views.expedition_complet, name='expeditions.completer'),
+    path('expeditions/supprimer/<int:id>', views.expedition_supprimer, name='expeditions.supprimer'),
+
 
     path('programme', views.programme, name='programme'),
     path('programme/nouveau', views.programme_nouveau, name='programme.nouveau'),

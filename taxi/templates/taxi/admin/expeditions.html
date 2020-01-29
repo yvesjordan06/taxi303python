@@ -26,6 +26,14 @@
                                    class="btn ml-auto download-button">Ajouter</a>
                             </span>
             </div>
+
+             <div class="col-12">
+                            <span class="d-flex align-items-center purchase-popup">
+                                <p>Voir les colis livree?</p>
+                                <a href="{% url 'expeditions.terminer' %}"
+                                   class="btn ml-auto download-button">Voir</a>
+                            </span>
+            </div>
         </div>
         <div class="row">
 
@@ -37,7 +45,7 @@
                         <table class="table ">
                             <thead>
                             <tr>
-                                <th> User</th>
+                                <th> Client</th>
                                 <th> Contenu</th>
                                 <th> Depart</th>
                                 <th> Destination</th>
@@ -48,20 +56,23 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr>
+                            {% for expedition in expeditions %}
+                                <tr>
                                 <td class="py-1">
-                                    John Doe
+                                    {{ expedition.colis.client }}
                                 </td>
-                                <td> Sack de Macabo</td>
-                                <td> Yaounde</td>
-                                <td> Douala</td>
-                                <td> 7000 FCFA</td>
-                                <td> En attente</td>
+                                <td> {{ expedition.colis.nom }}</td>
+                                <td> {{ expedition.depart }}</td>
+                                <td> {{ expedition.arrive }}</td>
+                                <td> {{ expedition.tarif }} FCFA</td>
+                                <td> {% if expedition.livree %}Livree{% else %} En Attente {% endif %}</td>
                                 <td>
-                                    <a href=""><label class="badge badge-danger">Supprimer</label></a>
+                                    <a href="{% url 'expeditions.completer' expedition.id %}"><label class="badge badge-success">Livree</label></a>
+                                    <a href="{% url 'expeditions.supprimer' expedition.id %}"><label class="badge badge-danger">Supprimer</label></a>
                                 </td>
                             </tr>
+                            {% endfor %}
+
 
                             </tbody>
                         </table>

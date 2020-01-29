@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" width="313">
-                                    <p>John</p>
+                                    <p>{{ employee.user }}</p>
                                 </td>
                                 <td colspan="4" width="349">
                                     <p>Tala Voyage</p>
@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" width="313">
-                                    <p>Chef d'agence</p>
+                                    <p>{{ employee.poste }}</p>
                                 </td>
                                 <td colspan="4" width="349">
                                     <p>Yaoundé, Cameroun</p>
@@ -100,7 +100,7 @@
                                     <p>Salaire de base</p>
                                 </td>
                                 <td width="89">
-                                    <p>210000 FCFA</p>
+                                    <p>{{ employee.salaire }} FCFA</p>
                                 </td>
                                 <td width="91">
                                     <p>&nbsp;</p>
@@ -200,7 +200,7 @@
                                     <p><strong>NET A PAYER&nbsp;&nbsp; </strong>(4)</p>
                                 </td>
                                 <td width="89">
-                                    <p><strong>200000 FCFA</strong></p>
+                                    <p><strong>{{ employee.salaire }} FCFA</strong></p>
                                 </td>
                                 <td width="91">
                                     <p>&nbsp;</p>
